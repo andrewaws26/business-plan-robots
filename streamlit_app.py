@@ -1,131 +1,146 @@
 import streamlit as st
-import pandas as pd
-import plotly.express as px
 
 # 1. Page Configuration
 st.set_page_config(
-    page_title="The Automation Blueprint", 
-    page_icon="⚙️", 
-    layout="wide"
+    page_title="The Blueprint", 
+    page_icon="📖", 
+    layout="centered" # Changed to centered for a better reading experience
 )
 
-# 2. Custom CSS for UI Enhancement
+# 2. Custom CSS for a "Scrollytelling" Editorial Feel
 st.markdown("""
 <style>
-    .main-header {
-        font-size: 42px;
+    /* Hero Section */
+    .hero-title {
+        font-size: 56px;
         font-weight: 900;
         color: #0F172A;
         text-align: center;
-        margin-bottom: 5px;
+        margin-top: 50px;
+        margin-bottom: 10px;
+        line-height: 1.1;
     }
-    .sub-header {
-        font-size: 22px;
+    .hero-subtitle {
+        font-size: 24px;
         color: #64748B;
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 80px;
+        font-weight: 300;
     }
-    .card {
-        background-color: #F8FAFC;
-        padding: 25px;
-        border-radius: 12px;
-        border-left: 5px solid #3B82F6;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        margin-bottom: 20px;
-        height: 100%;
-    }
-    .highlight {
-        color: #2563EB;
+    
+    /* Chapter Formatting */
+    .chapter-number {
+        font-size: 16px;
         font-weight: bold;
+        color: #2563EB;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: -10px;
+        margin-top: 60px;
+    }
+    .chapter-title {
+        font-size: 36px;
+        font-weight: 800;
+        color: #1E293B;
+        margin-bottom: 20px;
+    }
+    .story-text {
+        font-size: 20px;
+        color: #334155;
+        line-height: 1.8;
+        margin-bottom: 30px;
+    }
+    
+    /* Highlight Cards inside the story */
+    .story-card {
+        background-color: #F8FAFC;
+        padding: 30px;
+        border-radius: 8px;
+        border-left: 4px solid #0F172A;
+        margin: 40px 0;
+        font-size: 18px;
+        color: #475569;
+        font-style: italic;
+    }
+    
+    /* Divider */
+    .story-divider {
+        height: 1px;
+        background-color: #E2E8F0;
+        margin: 60px 0;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# 3. Headers
-st.markdown('<div class="main-header">The Automation & Wealth Blueprint</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-header">Transitioning from Software Engineering to Industrial Empire</div>', unsafe_allow_html=True)
+# 3. The Hero Section
+st.markdown('<div class="hero-title">The Kentucky Crucible</div>', unsafe_allow_html=True)
+st.markdown('<div class="hero-subtitle">A 24-month roadmap from the rail yard to financial independence.</div>', unsafe_allow_html=True)
 
-# 4. Interactive Tabs
-tab1, tab2, tab3 = st.tabs(["🏗️ Phase 1: The Crucible", "🚀 Phase 2A: The Equity Leap", "🌍 Phase 2B: The Integrator Empire"])
+# 4. Chapter 1
+st.markdown('<div class="chapter-number">Chapter 01</div>', unsafe_allow_html=True)
+st.markdown('<div class="chapter-title">The Foundation of Dirt and Code</div>', unsafe_allow_html=True)
+st.markdown("""
+<div class="story-text">
+The journey doesn't start in a sterile Silicon Valley office. It starts in a heavy-duty rail yard, surrounded by 200-pound wooden ties and the noise of pneumatic grippers. 
+<br><br>
+This is the crucible. The goal here isn't just to write code; it's to force a collision between an object-oriented software background and the rigid, unforgiving reality of industrial physics. By implementing Finite State Machines into legacy Val3 code, bridging AI vision systems, and mastering offline 3D simulation, a unique engineer is forged. One who doesn't just theorize, but builds.
+</div>
+""", unsafe_allow_html=True)
 
-# --- TAB 1: Current State ---
-with tab1:
-    st.markdown("### The Crucible (Months 1-24)")
-    st.info("**Primary Objective:** Transform pure software architecture skills into battle-tested mechatronic capability.")
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("""
-        <div class="card">
-        <h4>Core Technical Benchmarks</h4>
-        <ul>
-            <li><b>Procedural Optimization:</b> Implement Finite State Machines (FSM) to eliminate nested industrial code logic.</li>
-            <li><b>Cycle Time Reduction:</b> Master motion blending and asynchronous I/O vision polling to push output to sprint capacity.</li>
-            <li><b>Virtual Commissioning:</b> Utilize 3D simulation engines to validate hardware safety offline.</li>
-        </ul>
-        </div>
-        """, unsafe_allow_html=True)
-        
-    with col2:
-        st.markdown("""
-        <div class="card">
-        <h4>Controls & Floor Integration</h4>
-        <ul>
-            <li><b>PLC Architecture:</b> Map electrical cabinet wiring and ladder logic to bridge AI vision networks with servo drives.</li>
-            <li><b>Safety Protocols:</b> Ensure system compliance with rigid industrial safety standards.</li>
-            <li><b>Cross-Disciplinary Trust:</b> Translate high-level codebase changes into pragmatic language for floor mechanics.</li>
-        </ul>
-        </div>
-        """, unsafe_allow_html=True)
+st.markdown("""
+<div class="story-card">
+"In 24 months, the transformation is complete. The software engineer becomes a battle-tested robotic integrator, capable of shaving seconds off a cycle time while keeping the hardware intact."
+</div>
+""", unsafe_allow_html=True)
 
-# --- TAB 2: Aerospace/Big Tech ---
-with tab2:
-    st.markdown("### The Equity Leap (Aerospace & Advanced Tech)")
-    st.success("**Primary Objective:** Secure private tender offer equity or high-value RSUs to dramatically accelerate financial independence.")
-    
-    st.markdown("#### Target Role Profile: Automation Controls / HIL Engineer")
-    st.write("Leveraging the friction of rugged physical deployments to completely bypass traditional engineering degree filters.")
-    
-    st.divider()
-    
-    metrics_col1, metrics_col2, metrics_col3 = st.columns(3)
-    metrics_col1.metric("Base Compensation Pivot", "$115k - $135k+", "Tier II Equivalent")
-    metrics_col2.metric("Primary Wealth Vehicle", "Company Equity", "RSUs / Private Stock")
-    metrics_col3.metric("Execution Timeline", "Month 24", "Post-Crucible")
+st.markdown('<div class="story-divider"></div>', unsafe_allow_html=True)
 
-# --- TAB 3: Independent Business ---
-with tab3:
-    st.markdown("### The Integrator Empire (Shenzhen Arbitrage)")
-    st.warning("**Primary Objective:** Build an independent B2B Robotics Integration firm operating on a strict, debt-free cash flow model.")
-    
+# 5. Chapter 2
+st.markdown('<div class="chapter-number">Chapter 02</div>', unsafe_allow_html=True)
+st.markdown('<div class="chapter-title">The Unfair Advantage</div>', unsafe_allow_html=True)
+st.markdown("""
+<div class="story-text">
+Traditional engineers are siloed. They either understand the mechanical load paths, or they understand the high-level C# architecture, or they understand the business ROI. Rarely do they understand all three.
+<br><br>
+But there is a fourth multiplier: Shenzhen. Six months on the ground in the manufacturing capital of the world, combined with absolute fluency in Mandarin, shatters the traditional supply chain. This isn't just an engineering profile anymore; it is an international arbitrage machine.
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="story-divider"></div>', unsafe_allow_html=True)
+
+# 6. Chapter 3
+st.markdown('<div class="chapter-number">Chapter 03</div>', unsafe_allow_html=True)
+st.markdown('<div class="chapter-title">The Divergence</div>', unsafe_allow_html=True)
+st.markdown("""
+<div class="story-text">
+At the end of year two, the path splits into two distinct, highly lucrative directions. The choice depends entirely on the desired lifestyle.
+</div>
+""", unsafe_allow_html=True)
+
+# Split into two columns for the final decision
+col1, col2 = st.columns(2, gap="large")
+
+with col1:
+    st.markdown("### Path A: The Equity Leap")
     st.markdown("""
-    By leveraging foundational business administration mechanics, alongside native-level Mandarin fluency and geographical familiarity with the Guangdong manufacturing hub, the traditional US supply chain middleman is bypassed for maximum margin.
-    """)
-    
-    st.divider()
-    
-    st.markdown("#### The 50/40/10 Hardware Cash Flow Model")
-    
-    # Financial Data for Plotly Chart
-    data = {
-        "Project Phase": ["1. Down Payment (Signing)", "2. FAT (Factory Acceptance)", "3. SAT (Site Acceptance)"],
-        "Capital Percentage": [50, 40, 10],
-        "Cash Allocation ($)": [42500, 34000, 8500],
-        "Operational Purpose": ["Hardware Sourcing & Freight", "Software Labor & Staging", "Pure System Profit"]
-    }
-    df = pd.DataFrame(data)
-    
-    # Plotly Bar Chart
-    fig = px.bar(
-        df, 
-        x="Project Phase", 
-        y="Capital Percentage", 
-        text="Cash Allocation ($)", 
-        color="Project Phase", 
-        title="Standard $85k Turnkey Cell Revenue Structure",
-        color_discrete_sequence=["#1E3A8A", "#3B82F6", "#93C5FD"]
-    )
-    fig.update_traces(texttemplate='$%{text:,}', textposition='outside')
-    fig.update_layout(yaxis_range=[0, 60], showlegend=False)
-    
-    st.plotly_chart(fig, use_container_width=True)
+    <div style="font-size: 18px; color: #475569; line-height: 1.6;">
+    The aerospace route. Companies like SpaceX desperately need builders who can navigate the ambiguity of bringing up prototype hardware. The massive value here lies in restricted stock units (RSUs) and private tender offers. You trade 60-hour weeks for a highly accelerated, multi-million dollar liquidity event.
+    </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown("### Path B: The Integrator Empire")
+    st.markdown("""
+    <div style="font-size: 18px; color: #475569; line-height: 1.6;">
+    The B2B route. Leveraging the business degree and Mandarin fluency to bypass US middlemen. Sourcing bare-metal cobots directly from Guangdong on Net-60 terms, wrapping them in custom software logic, and selling $85,000 turnkey solutions to Midwest factories using a cash-flow positive 50/40/10 model. Complete autonomy.
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown('<div class="story-divider"></div>', unsafe_allow_html=True)
+
+# 7. Footer
+st.markdown("""
+<div style="text-align: center; color: #94A3B8; font-size: 16px; margin-bottom: 50px;">
+The code is written. The hardware is waiting.
+</div>
+""", unsafe_allow_html=True)
