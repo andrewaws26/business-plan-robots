@@ -1,151 +1,131 @@
 import streamlit as st
 import pandas as pd
-import math
-from pathlib import Path
+import plotly.express as px
 
-# Set the title and favicon that appear in the Browser's tab bar.
+# 1. Page Configuration
 st.set_page_config(
-    page_title='GDP dashboard',
-    page_icon=':earth_americas:', # This is an emoji shortcode. Could be a URL too.
+    page_title="The Automation Blueprint", 
+    page_icon="⚙️", 
+    layout="wide"
 )
 
-# -----------------------------------------------------------------------------
-# Declare some useful functions.
+# 2. Custom CSS for UI Enhancement
+st.markdown("""
+<style>
+    .main-header {
+        font-size: 42px;
+        font-weight: 900;
+        color: #0F172A;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    .sub-header {
+        font-size: 22px;
+        color: #64748B;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    .card {
+        background-color: #F8FAFC;
+        padding: 25px;
+        border-radius: 12px;
+        border-left: 5px solid #3B82F6;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+        height: 100%;
+    }
+    .highlight {
+        color: #2563EB;
+        font-weight: bold;
+    }
+</style>
+""", unsafe_allow_html=True)
 
-@st.cache_data
-def get_gdp_data():
-    """Grab GDP data from a CSV file.
+# 3. Headers
+st.markdown('<div class="main-header">The Automation & Wealth Blueprint</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-header">Transitioning from Software Engineering to Industrial Empire</div>', unsafe_allow_html=True)
 
-    This uses caching to avoid having to read the file every time. If we were
-    reading from an HTTP endpoint instead of a file, it's a good idea to set
-    a maximum age to the cache with the TTL argument: @st.cache_data(ttl='1d')
-    """
+# 4. Interactive Tabs
+tab1, tab2, tab3 = st.tabs(["🏗️ Phase 1: The Crucible", "🚀 Phase 2A: The Equity Leap", "🌍 Phase 2B: The Integrator Empire"])
 
-    # Instead of a CSV on disk, you could read from an HTTP endpoint here too.
-    DATA_FILENAME = Path(__file__).parent/'data/gdp_data.csv'
-    raw_gdp_df = pd.read_csv(DATA_FILENAME)
+# --- TAB 1: Current State ---
+with tab1:
+    st.markdown("### The Crucible (Months 1-24)")
+    st.info("**Primary Objective:** Transform pure software architecture skills into battle-tested mechatronic capability.")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("""
+        <div class="card">
+        <h4>Core Technical Benchmarks</h4>
+        <ul>
+            <li><b>Procedural Optimization:</b> Implement Finite State Machines (FSM) to eliminate nested industrial code logic.</li>
+            <li><b>Cycle Time Reduction:</b> Master motion blending and asynchronous I/O vision polling to push output to sprint capacity.</li>
+            <li><b>Virtual Commissioning:</b> Utilize 3D simulation engines to validate hardware safety offline.</li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    with col2:
+        st.markdown("""
+        <div class="card">
+        <h4>Controls & Floor Integration</h4>
+        <ul>
+            <li><b>PLC Architecture:</b> Map electrical cabinet wiring and ladder logic to bridge AI vision networks with servo drives.</li>
+            <li><b>Safety Protocols:</b> Ensure system compliance with rigid industrial safety standards.</li>
+            <li><b>Cross-Disciplinary Trust:</b> Translate high-level codebase changes into pragmatic language for floor mechanics.</li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
 
-    MIN_YEAR = 1960
-    MAX_YEAR = 2022
+# --- TAB 2: Aerospace/Big Tech ---
+with tab2:
+    st.markdown("### The Equity Leap (Aerospace & Advanced Tech)")
+    st.success("**Primary Objective:** Secure private tender offer equity or high-value RSUs to dramatically accelerate financial independence.")
+    
+    st.markdown("#### Target Role Profile: Automation Controls / HIL Engineer")
+    st.write("Leveraging the friction of rugged physical deployments to completely bypass traditional engineering degree filters.")
+    
+    st.divider()
+    
+    metrics_col1, metrics_col2, metrics_col3 = st.columns(3)
+    metrics_col1.metric("Base Compensation Pivot", "$115k - $135k+", "Tier II Equivalent")
+    metrics_col2.metric("Primary Wealth Vehicle", "Company Equity", "RSUs / Private Stock")
+    metrics_col3.metric("Execution Timeline", "Month 24", "Post-Crucible")
 
-    # The data above has columns like:
-    # - Country Name
-    # - Country Code
-    # - [Stuff I don't care about]
-    # - GDP for 1960
-    # - GDP for 1961
-    # - GDP for 1962
-    # - ...
-    # - GDP for 2022
-    #
-    # ...but I want this instead:
-    # - Country Name
-    # - Country Code
-    # - Year
-    # - GDP
-    #
-    # So let's pivot all those year-columns into two: Year and GDP
-    gdp_df = raw_gdp_df.melt(
-        ['Country Code'],
-        [str(x) for x in range(MIN_YEAR, MAX_YEAR + 1)],
-        'Year',
-        'GDP',
+# --- TAB 3: Independent Business ---
+with tab3:
+    st.markdown("### The Integrator Empire (Shenzhen Arbitrage)")
+    st.warning("**Primary Objective:** Build an independent B2B Robotics Integration firm operating on a strict, debt-free cash flow model.")
+    
+    st.markdown("""
+    By leveraging foundational business administration mechanics, alongside native-level Mandarin fluency and geographical familiarity with the Guangdong manufacturing hub, the traditional US supply chain middleman is bypassed for maximum margin.
+    """)
+    
+    st.divider()
+    
+    st.markdown("#### The 50/40/10 Hardware Cash Flow Model")
+    
+    # Financial Data for Plotly Chart
+    data = {
+        "Project Phase": ["1. Down Payment (Signing)", "2. FAT (Factory Acceptance)", "3. SAT (Site Acceptance)"],
+        "Capital Percentage": [50, 40, 10],
+        "Cash Allocation ($)": [42500, 34000, 8500],
+        "Operational Purpose": ["Hardware Sourcing & Freight", "Software Labor & Staging", "Pure System Profit"]
+    }
+    df = pd.DataFrame(data)
+    
+    # Plotly Bar Chart
+    fig = px.bar(
+        df, 
+        x="Project Phase", 
+        y="Capital Percentage", 
+        text="Cash Allocation ($)", 
+        color="Project Phase", 
+        title="Standard $85k Turnkey Cell Revenue Structure",
+        color_discrete_sequence=["#1E3A8A", "#3B82F6", "#93C5FD"]
     )
-
-    # Convert years from string to integers
-    gdp_df['Year'] = pd.to_numeric(gdp_df['Year'])
-
-    return gdp_df
-
-gdp_df = get_gdp_data()
-
-# -----------------------------------------------------------------------------
-# Draw the actual page
-
-# Set the title that appears at the top of the page.
-'''
-# :earth_americas: GDP dashboard
-
-Browse GDP data from the [World Bank Open Data](https://data.worldbank.org/) website. As you'll
-notice, the data only goes to 2022 right now, and datapoints for certain years are often missing.
-But it's otherwise a great (and did I mention _free_?) source of data.
-'''
-
-# Add some spacing
-''
-''
-
-min_value = gdp_df['Year'].min()
-max_value = gdp_df['Year'].max()
-
-from_year, to_year = st.slider(
-    'Which years are you interested in?',
-    min_value=min_value,
-    max_value=max_value,
-    value=[min_value, max_value])
-
-countries = gdp_df['Country Code'].unique()
-
-if not len(countries):
-    st.warning("Select at least one country")
-
-selected_countries = st.multiselect(
-    'Which countries would you like to view?',
-    countries,
-    ['DEU', 'FRA', 'GBR', 'BRA', 'MEX', 'JPN'])
-
-''
-''
-''
-
-# Filter the data
-filtered_gdp_df = gdp_df[
-    (gdp_df['Country Code'].isin(selected_countries))
-    & (gdp_df['Year'] <= to_year)
-    & (from_year <= gdp_df['Year'])
-]
-
-st.header('GDP over time', divider='gray')
-
-''
-
-st.line_chart(
-    filtered_gdp_df,
-    x='Year',
-    y='GDP',
-    color='Country Code',
-)
-
-''
-''
-
-
-first_year = gdp_df[gdp_df['Year'] == from_year]
-last_year = gdp_df[gdp_df['Year'] == to_year]
-
-st.header(f'GDP in {to_year}', divider='gray')
-
-''
-
-cols = st.columns(4)
-
-for i, country in enumerate(selected_countries):
-    col = cols[i % len(cols)]
-
-    with col:
-        first_gdp = first_year[first_year['Country Code'] == country]['GDP'].iat[0] / 1000000000
-        last_gdp = last_year[last_year['Country Code'] == country]['GDP'].iat[0] / 1000000000
-
-        if math.isnan(first_gdp):
-            growth = 'n/a'
-            delta_color = 'off'
-        else:
-            growth = f'{last_gdp / first_gdp:,.2f}x'
-            delta_color = 'normal'
-
-        st.metric(
-            label=f'{country} GDP',
-            value=f'{last_gdp:,.0f}B',
-            delta=growth,
-            delta_color=delta_color
-        )
+    fig.update_traces(texttemplate='$%{text:,}', textposition='outside')
+    fig.update_layout(yaxis_range=[0, 60], showlegend=False)
+    
+    st.plotly_chart(fig, use_container_width=True)
